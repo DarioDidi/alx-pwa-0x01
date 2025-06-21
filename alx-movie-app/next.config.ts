@@ -5,4 +5,13 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
 };
 
+module.exports = {
+  images: {
+    remotePatterns: [
+      new URL('https://moviesdatabase.p.rapidapi.com/titles**'),
+      new URL('https://m.media-amazon.com/**')
+    ],
+  },
+}
+
 export default nextConfig;

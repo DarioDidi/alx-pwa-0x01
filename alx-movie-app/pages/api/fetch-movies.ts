@@ -6,9 +6,8 @@ export default async function handler(request: NextApiRequest, response: NextApi
   if (request.method === "POST") {
     const { year, page, genre } = request.body;
     const date = new Date();
-    const resp = await fetch(
-      `https://moviesdatabase.p.rapidapi.com/titles?year=${year || date.getFullYear()}&sort=year.decr&limit=12&page=${page}&${genre && `genre=${genre}`}`,
-
+    const fetchUrl = `https://moviesdatabase.p.rapidapi.com/titles?year=${year || date.getFullYear()}&sort=year.decr&limit=12&page=${page}&${genre && `genre=${genre}`}`
+    const resp = await fetch(fetchUrl,
       {
         headers: {
           "x-rapidapi-host": "moviesdatabase.p.rapidapi.com",
