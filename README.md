@@ -1,3 +1,6 @@
+#  MoviesDatabase API documentation
+
+
 ## API overview
     Collection of information for movies, tv-shows, actors.
     Includes youtube trailer url, awards, full biography, and many other usefull informations. 
@@ -5,8 +8,7 @@
     and 11 million actors / crew and cast members. 
 
 
-## API Version
-    v1
+#### API Version: v1
 
 
 ## Available Endpoints
@@ -119,10 +121,33 @@ ALL query parameters are OPTIONAL
         knownForTitles:"tt0050419,tt0053137,tt0072308,tt0031983",
 
 ## Authentication
-    Requests Do Not require any authentication
-    Authorization: No additional authorizations needed
+    To access the API, you will need to authenticate your requests by including an API key in the request header.
+    Please refer to the authentication section in the API documentation for instructions
+    on how to generate and include the API key in your requests.
 
 ## Error Handling 
+ Common HTTP Status Codes
+
+    400 Bad Request: This status is returned when your request is malformed or missing some required parameters. The response body might also include a “message” field, explaining the specific error. Ensure that all required fields are included and properly formatted before retrying your request.
+
+    403 Forbidden: This error indicates that you are not subscribed to the API or that your API key is invalid. If you believe this is in error, please contact RapidAPI support - support@rapidapi.com.
+
+    404 Not Found: This status is returned if the requested resource could not be found. This can occur with incorrect URL endpoints. Double-check the URL and try again.
+
+    429 Too Many Requests: This error means you have hit the rate limit for your subscription plan. Wait until your rate limit resets, or consider upgrading your subscription plan for a higher limit. If you believe this is in error, please contact us.
+
+    5XX Server Error (500, 502, and 503): This indicates a problem with our servers processing your request or an internal server timeout. This is a rare occurrence and should be temporary. If this error persists, please contact our technical support for assistance at    
+
+
+### Handling
+    Retry Logic: For 5XX (500, 502, 503) and 429, implement a retry mechanism that waits for a few seconds before retrying the request.
+
+    Validation: Prior to sending requests, validate parameters to catch common errors like 400 Bad Request.
+
+    Logging: Log error responses for further analysis to understand patterns or recurring issues that might require changes in how you integrate with the API. The request_id field in the response can be used for further debugging.
+
+    User Feedback: When applicable, Provide clear messages to your users when an error occurs, potentially using the information from the error response.
+
     example: 
     path: GET https://moviesdatabase.p.rapidapi.com/titles/
     message	"Invalid API key. Go to https://docs.rapidapi.com/docs/keys for more info."
@@ -137,16 +162,8 @@ ALL query parameters are OPTIONAL
     
 
 ## Usage Limits and Best Practices
-    Use Parameters
-    - limit: NUMBER
-        default: 10
-        description: number of objects per page (max 50)
+    API rate LIMIT: 1000 requests per hour
+    Requests: 500,000 / Month (Hard Limit)
 
-    - exact: STRING
-        default : false
-        description: set the lookup to match the exact text, available only in Search - Titles by Title
-
-    - genre STRING  
-        when searching for genres
-        filter by genre of title, case sensitive - has to be capitalize, options for this field from /title/utils/genres
-
+    Perfect for developers, startups, and businesses looking for scalable, reliable, and cost-effective APIs.
+    When hitting the rate limits of the API, the gateway will return a 429 Too Many Requests error. 
