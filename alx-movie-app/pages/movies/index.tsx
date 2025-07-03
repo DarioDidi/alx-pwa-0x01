@@ -31,6 +31,7 @@ const Movies: React.FC<MProps> = () => {
     });
 
     if (!response.ok) {
+      console.log("response:", response)
       setLoading(false);
       throw new Error("something went wrong");
     }
