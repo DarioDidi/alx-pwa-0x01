@@ -1,15 +1,16 @@
 import { MovieProps } from "@/interfaces";
 import { NextApiRequest, NextApiResponse } from "next";
-import { headers } from "next/headers";
 
 export default async function handler(request: NextApiRequest, response: NextApiResponse) {
   if (request.method === "POST") {
     const { year, page, genre } = request.body;
     const date = new Date();
     const fetchUrl = `https://moviesdatabase.p.rapidapi.com/titles?year=${year || date.getFullYear()}&sort=year.decr&limit=12&page=${page}&${genre && `genre=${genre}`}`
+
     const resp = await fetch(fetchUrl,
       {
         headers: {
+
           "x-rapidapi-host": "moviesdatabase.p.rapidapi.com",
           "x-rapidapi-key": `${process.env.MOVIE_API_KEY}`,
         },
